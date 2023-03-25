@@ -45,7 +45,7 @@ def floor(value):
 
 
 # Diccionario que almacena el estado actual del juego
-state = {'player': 0}
+state = {'player': 0, 'board': {}}
 
 # Lista que contiene las funciones de dibujo de los jugadores
 players = [drawx, drawo]
@@ -57,12 +57,15 @@ def tap(x, y):
     y = floor(y)
     player = state['player']
     draw = players[player]
+    if (x, y) in state['board']:
+        # Si la casilla ya esta seleccionada, no se reescribe
+        return
     draw(x, y)
     update()
+    state['board'][(x, y)] = player
     state['player'] = not player
 
 
-# Configuración inicial de la ventana de dibujo
 setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)

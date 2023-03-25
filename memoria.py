@@ -1,5 +1,6 @@
 # Ignorar errores F403 y F405 de flake8
-# Errores corregidos (E302, W292) y comentarios añadidos
+# Funcion añadida 1: imprimir número de taps
+# Funcion añadida 2: revisar si las casillas están reveladas
 
 """Juego de memoria
 Evidencia Semana Tec
@@ -16,6 +17,7 @@ car = path('car.gif')
 tiles = list(range(32)) * 2
 state = {'mark': None}
 hide = [True] * 64
+taps = 0  # Variable para contar los taps
 
 
 def square(x, y):
@@ -43,6 +45,8 @@ def xy(count):
 
 def tap(x, y):
     """Actualiza las casillas marcadas y en blanco."""
+    global taps  # Acceso a la variable tap
+    taps += 1  # Incrementa tap
     spot = index(x, y)
     mark = state['mark']
 
@@ -77,6 +81,10 @@ def draw():
 
     update()
     ontimer(draw, 100)
+
+    if not any(hide):  # Revisa si todas las casillas fueron reveladas
+        print("Game over! Number of taps:", taps)  # Imprime el numero de taps
+        return
 
 
 shuffle(tiles)

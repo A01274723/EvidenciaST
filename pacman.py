@@ -21,10 +21,10 @@ writer = Turtle(visible=False)
 aim = vector(5, 0)      # Dirección inicial a la que pacman apunta para desplazarse.
 pacman = vector(-40, -80)       # Posición inciial de pacman.
 ghosts = [      # Posición inicial de todos los fantasmas.
-    [vector(-180, 160), vector(5, 0)],
-    [vector(-180, -160), vector(0, 5)],
-    [vector(100, 160), vector(0, -5)],
-    [vector(100, -160), vector(-5, 0)],
+    [vector(-180, 160), vector(10, 0)],
+    [vector(-180, -160), vector(0, 10)],
+    [vector(100, 160), vector(0, -10)],
+    [vector(100, -160), vector(-10, 0)],
 ]
 # fmt: apagado.
 # Lista de cada una de las casillas usadas en la ventana del juego. El valor 0 representa una casilla negra con colisión, mientras que el valor 1 rerpesenta a las casillas azules con 1 punto disponible y sin colisión.
@@ -138,10 +138,10 @@ def move():
             point.move(course)
         else:
             options = [         # Elige aleatoriamente una opción de movimiento para los fantasmas cada que topan con una pared.
-                vector(5, 0),
-                vector(-5, 0),
-                vector(0, 5),
-                vector(0, -5),
+                vector(10, 0),
+                vector(-10, 0),
+                vector(0, 10),
+                vector(0, -10),
             ]
             plan = choice(options)
             course.x = plan.x

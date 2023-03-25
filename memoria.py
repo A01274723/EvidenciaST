@@ -1,5 +1,15 @@
+# Ignorar errores F403 y F405 de flake8
+# Errores corregidos (E302, W292) y comentarios añadidos
+
+"""Juego de memoria
+Evidencia Semana Tec
+Jesus Ramirez Delgado
+Equipo 1
+"""
+
 from random import *
 from turtle import *
+
 from freegames import path
 
 car = path('car.gif')
@@ -7,8 +17,9 @@ tiles = list(range(32)) * 2
 state = {'mark': None}
 hide = [True] * 64
 
+
 def square(x, y):
-    "Draw white square with black outline at (x, y)."
+    """Dibuja el tablero blanco con lineas negras (x, y)."""
     up()
     goto(x, y)
     down()
@@ -19,16 +30,19 @@ def square(x, y):
         left(90)
     end_fill()
 
+
 def index(x, y):
-    "Convert (x, y) coordinates to tiles index."
+    """Añade el indice (x, y)"""
     return int((x + 200) // 50 + ((y + 200) // 50) * 8)
 
+
 def xy(count):
-    "Convert tiles count to (x, y) coordinates."
+    """Recuento de casillas en coordenadas (x, y)."""
     return (count % 8) * 50 - 200, (count // 8) * 50 - 200
 
+
 def tap(x, y):
-    "Update mark and hidden tiles based on tap."
+    """Actualiza las casillas marcadas y en blanco."""
     spot = index(x, y)
     mark = state['mark']
 
@@ -39,8 +53,9 @@ def tap(x, y):
         hide[mark] = False
         state['mark'] = None
 
+
 def draw():
-    "Draw image and tiles."
+    """Genera la imagen y las filas."""
     clear()
     goto(0, 0)
     shape(car)
@@ -62,6 +77,7 @@ def draw():
 
     update()
     ontimer(draw, 100)
+
 
 shuffle(tiles)
 setup(420, 420, 370, 0)

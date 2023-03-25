@@ -1,20 +1,11 @@
-"""Tic Tac Toe
-
-Exercises
-
-1. Give the X and O a different color and width.
-2. What happens when someone taps a taken spot?
-3. How would you detect when someone has won?
-4. How could you create a computer player?
-"""
-
-from turtle import *
-
-from freegames import line
+# Importa las funciones necesarias de la librería Turtle
+from turtle import Turtle, tracer, update, done
+from turtle import setup, onscreenclick, hideturtle
+from freegames import line  # Importa "line" de la librería "freegames"
 
 
 def grid():
-    """Draw tic-tac-toe grid."""
+    """Función para dibujar la cuadrícula del juego"""
     line(-67, 200, -67, -200)
     line(67, 200, 67, -200)
     line(-200, -67, 200, -67)
@@ -22,30 +13,46 @@ def grid():
 
 
 def drawx(x, y):
-    """Draw X player."""
-    line(x, y, x + 133, y + 133)
-    line(x, y + 133, x + 133, y)
+    """ Función para dibujar la cruz en la posición del jugador X"""
+    t = Turtle()  # Crea un objeto de la clase Turtle
+    t.pencolor('red')  # Establece el color de la línea en rojo
+    t.pensize(10)  # Establece el grosor de la línea en 10
+    t.up()  # Levanta el lápiz
+    t.goto(x + 20, y + 20)  # Mueve el lápiz a la posición indicada
+    t.down()  # Baja el lápiz
+    # Dibuja la cruz utilizando la función "goto" en las posiciones indicadas
+    t.goto(x + 113, y + 113)
+    t.up()
+    t.goto(x + 20, y + 113)
+    t.down()
+    t.goto(x + 113, y + 20)
 
 
 def drawo(x, y):
-    """Draw O player."""
-    up()
-    goto(x + 67, y + 5)
-    down()
-    circle(62)
+    """Función para dibujar el círculo en la posición del jugador O"""
+    t = Turtle()  # Crea un objeto de la clase Turtle
+    t.up()  # Levanta el lápiz
+    t.goto(x + 67, y + 15)  # Mueve el lápiz a la posición indicada
+    t.down()  # Baja el lápiz
+    t.color('green')  # Establece el color del lápiz en verde
+    t.pensize(10)  # Establece el grosor del lápiz en 10
+    t.circle(50)  # Dibuja el círculo de radio 50
 
 
 def floor(value):
-    """Round value down to grid with square size 133."""
+    """Función para redondear las coordenadas a la cuadrícula más cercana"""
     return ((value + 200) // 133) * 133 - 200
 
 
+# Diccionario que almacena el estado actual del juego
 state = {'player': 0}
+
+# Lista que contiene las funciones de dibujo de los jugadores
 players = [drawx, drawo]
 
 
 def tap(x, y):
-    """Draw X or O in tapped square."""
+    """función que dibuja el simbolo en el cuadrado donde se hizo el clic"""
     x = floor(x)
     y = floor(y)
     player = state['player']
@@ -55,10 +62,11 @@ def tap(x, y):
     state['player'] = not player
 
 
+# Configuración inicial de la ventana de dibujo
 setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
 grid()
 update()
-onscreenclick(tap)
+onscreenclick(tap)  # Asignación de la función 'tap'
 done()
